@@ -73,7 +73,7 @@ resource "aws_security_group" "main" {
 
 resource "spacelift_worker_pool" "aws" {
   csr  = base64encode(tls_cert_request.main.cert_request_pem)
-  name = "AWS EC2 Worker Pool Example - ${random_string.suffix.id}"
+  name = "AWS EC2 Worker Pool (${random_string.suffix.id})"
 }
 
 # The private key and certificate are generated in Terraform for convenience in this demo.
