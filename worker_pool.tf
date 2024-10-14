@@ -22,11 +22,36 @@ module "worker_pool" {
   spacelift_api_key_id       = var.spacelift_api_key_id
   spacelift_api_key_secret   = var.spacelift_api_key_secret
   spacelift_api_key_endpoint = var.spacelift_api_key_endpoint
+
+  tag_specifications = [
+    {
+      resource_type = "instance"
+      tags = {
+        Name = "sp5ft-${var.worker_pool_id}"
+        Env = var.env
+      }
+    },
+    {
+      resource_type = "volume"
+      tags = {
+        Name = "sp5ft-${var.worker_pool_id}"
+        Env = var.env
+      }
+    },
+    {
+      resource_type = "network-interface"
+      tags = {
+        Name = "sp5ft-${var.worker_pool_id}"
+        Env = var.env
+      }
+    }
+  ]
 }
 
 resource "spacelift_worker_pool" "aws" {
-  csr  = base64encode(tls_cert_request.main.cert_request_pem)
-  name = "My WorkerPool (${random_string.suffix.id})"
+  csr      = base64encode(tls_cert_request.main.cert_request_pem)
+  name     = "My WorkerPool (${random_string.suffix.id})"
+  space_id = "root"
 }
 
 # The private key and certificate are generated in Terraform for convenience in this demo.
