@@ -27,21 +27,21 @@ module "worker_pool" {
     {
       resource_type = "instance"
       tags = {
-        Name = "sp5ft-${var.worker_pool_id}"
+        Name = "sp5ft-${spacelift_worker_pool.aws.id}"
         Env = var.env
       }
     },
     {
       resource_type = "volume"
       tags = {
-        Name = "sp5ft-${var.worker_pool_id}"
+        Name = "sp5ft-${spacelift_worker_pool.aws.id}"
         Env = var.env
       }
     },
     {
       resource_type = "network-interface"
       tags = {
-        Name = "sp5ft-${var.worker_pool_id}"
+        Name = "sp5ft-${spacelift_worker_pool.aws.id}"
         Env = var.env
       }
     }
