@@ -39,6 +39,7 @@ module "worker_pool" {
   security_groups = [aws_security_group.main.id]
   vpc_subnets     = module.vpc.private_subnets
   worker_pool_id  = spacelift_worker_pool.aws.id
+  enable_autoscaling = false
 }
 
 # All the resources below are created here so that this example is self-contained.
