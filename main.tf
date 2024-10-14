@@ -27,7 +27,7 @@ resource "random_string" "suffix" {
 }
 
 module "worker_pool" {
-  source = "github.com/spacelift-io/terraform-aws-spacelift-workerpool-on-ec2?ref=misc-improvements"
+  source = "github.com/spacelift-io/terraform-aws-spacelift-workerpool-on-ec2"
 
   configuration = <<-EOT
     export SPACELIFT_TOKEN="${spacelift_worker_pool.aws.config}"
