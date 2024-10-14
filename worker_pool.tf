@@ -6,8 +6,8 @@ module "worker_pool" {
     export SPACELIFT_POOL_PRIVATE_KEY="${base64encode(tls_private_key.main.private_key_pem)}"
   EOT
 
-  max_size          = var.min_size
-  min_size          = var.max_size
+  min_size          = var.min_size
+  max_size          = var.max_size
   ec2_instance_type = var.ec2_instance_type
   security_groups   = [aws_security_group.main.id]
   vpc_subnets       = module.vpc.private_subnets
