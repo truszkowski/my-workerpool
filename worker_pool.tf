@@ -9,8 +9,8 @@ module "worker_pool" {
   min_size          = var.min_size
   max_size          = var.max_size
   ec2_instance_type = var.ec2_instance_type
-  security_groups   = [aws_security_group.main.id]
-  vpc_subnets       = module.vpc.private_subnets
+  security_groups   = [data.aws_security_group.this.id]
+  vpc_subnets       = data.aws_subnets.this.ids
   worker_pool_id    = spacelift_worker_pool.aws.id
   
   enable_autoscaling    = false
