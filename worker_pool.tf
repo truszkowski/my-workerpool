@@ -13,11 +13,11 @@ module "worker_pool" {
   vpc_subnets       = module.vpc.private_subnets
   worker_pool_id    = spacelift_worker_pool.aws.id
   
-  enable_autoscaling    = true
-  autoscaler_s3_package = {
-    bucket = aws_s3_bucket.autoscaler_binary.id
-    key    = aws_s3_object.autoscaler_binary.id
-  }
+  enable_autoscaling    = false
+  #autoscaler_s3_package = {
+  #  bucket = aws_s3_bucket.autoscaler_binary.id
+  #  key    = aws_s3_object.autoscaler_binary.id
+  #}
 
   spacelift_api_key_id       = var.spacelift_api_key_id
   spacelift_api_key_secret   = var.spacelift_api_key_secret
