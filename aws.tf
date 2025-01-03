@@ -2,10 +2,6 @@
 # They could be created elsewhere and the values would then be passed as variables
 # and used by the "worker_pool" module above.
 
-provider "aws" {
-  region = "eu-west-1"
-}
-
 data "aws_vpc" "this" {
   default = true
 }
