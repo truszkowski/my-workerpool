@@ -2,29 +2,44 @@
 # They could be created elsewhere and the values would then be passed as variables
 # and used by the "worker_pool" module above.
 
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "3.18.1"
-
-  azs                = ["us-east-1a"]
-  cidr               = "10.1.0.0/16"
-  enable_nat_gateway = true
-  name               = "my-workerpool-${random_string.suffix.id}"
-  private_subnets    = ["10.1.1.0/24"]
-  public_subnets     = ["10.1.2.0/24"]
+provider "aws" {
+  region = "eu-west-1"
 }
 
-resource "aws_security_group" "main" {
-  name        = "my-workerpool-${random_string.suffix.id}"
-  description = "Worker pool security group, with unrestricted egress and no ingress"
-  vpc_id      = module.vpc.vpc_id
+data "aws_vpc" "this" {
+  default = true
+}
 
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
+data "aws_security_group" "this" {
+  name   = "default"
+  vpc_id = data.aws_vpc.this.id
+}
+
+data "aws_subnets" "this" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.this.id]
+  }
+}
+
+data "aws_ami" "this" {
+  most_recent = true
+  name_regex  = "^spacelift-\\d{10}-arm64$"
+  owners      = ["643313122712"]
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["arm64"]
   }
 }
 
