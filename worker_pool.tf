@@ -12,6 +12,7 @@ module "worker_pool" {
   security_groups   = [data.aws_security_group.this.id]
   vpc_subnets       = data.aws_subnets.this.ids
   worker_pool_id    = spacelift_worker_pool.aws.id
+  region            = var.region
   
   enable_autoscaling    = false
   #autoscaler_s3_package = {
