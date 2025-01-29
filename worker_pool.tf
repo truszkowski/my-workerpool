@@ -15,6 +15,7 @@ module "worker_pool" {
   region            = var.region
   
   enable_autoscaling    = false
+  autoscaling_group_arn = "whatever"
   #autoscaler_s3_package = {
   #  bucket = aws_s3_bucket.autoscaler_binary.id
   #  key    = aws_s3_object.autoscaler_binary.id
