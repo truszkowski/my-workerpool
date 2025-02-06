@@ -1,6 +1,5 @@
 module "worker_pool" {
-  source = "github.com/spacelift-io/terraform-aws-spacelift-workerpool-on-ec2"
-  version = "2.9.0"
+  source = "github.com/spacelift-io/terraform-aws-spacelift-workerpool-on-ec2?ref=v2.9.0"
 
   configuration = <<-EOT
     export SPACELIFT_TOKEN="${spacelift_worker_pool.aws.config}"
