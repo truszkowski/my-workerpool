@@ -5,7 +5,7 @@ variable "min_size" {
 
 variable "max_size" {
     type = number
-    default = 5
+    default = 2
 }
 
 variable "ec2_instance_type" {
