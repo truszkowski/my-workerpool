@@ -4,6 +4,7 @@ module "worker_pool" {
   configuration = <<-EOT
     export SPACELIFT_TOKEN="${spacelift_worker_pool.aws.config}"
     export SPACELIFT_POOL_PRIVATE_KEY="${base64encode(tls_private_key.main.private_key_pem)}"
+    export SPACELIFT_RUN_LOGS_ON_STANDARD_OUTPUT_ENABLED=true
   EOT
 
   min_size          = var.min_size
