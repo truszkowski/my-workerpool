@@ -8,6 +8,11 @@ variable "max_size" {
     default = 2
 }
 
+variable "domain_name" {
+    type = string
+    default = "spacelift.io"
+}
+
 variable "ec2_instance_type" {
     type = string
     default = "t3.micro"
