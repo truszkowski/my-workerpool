@@ -6,7 +6,7 @@ module "worker_pool" {
     export SPACELIFT_POOL_PRIVATE_KEY="${base64encode(tls_private_key.main.private_key_pem)}"
     export SPACELIFT_RUN_LOGS_ON_STANDARD_OUTPUT_ENABLED=true
     export SPACELIFT_WORKER_COMMS_PROTOCOL=poll
-    export SPACELIFT_WORKER_COMMS_URL=https://app.spacelift.dev
+    export SPACELIFT_WORKER_COMMS_URL="https://app.${var.domain_name}"
   EOT
 
   min_size          = var.min_size
